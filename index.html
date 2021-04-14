@@ -10,38 +10,41 @@
  
   
   <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-       Meal Planning API
-      </h1>
-      <p class="subtitle">
-        Hello! and Welcome to the <strong>Meal Planning API</strong>! Please use the below and create the a schedule for week with all the ingredients that you need need
-      </p>
-    </div>
-  </section>
-  </body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">
+          
+        </h1>
+        <p class="subtitle">
+          Hello! and Welcome to the <strong>Meal Planning API</strong>! Please use the below and create the a schedule for week with all the ingredients that you need need
+        </p>
+      </div>
+    </section>
 
     <div class="container">
-    <div class="notification is-primary">
-      <strong class="day">Sunday</strong>
-        <div class="btn">
-      <input type="textMeal" class="searchMeal" placeholder="Enter Your Meal Here">
-      <button type="type" class="searchBtn">Enter</button>
+      <div class="notification is-primary">
+        <strong class="day">Sunday</strong>
+        <form class="btn">
+
+          <input type="text" class="searchMeal" name='sundaymeal' placeholder="Enter Your Meal Here">
+          <button type="submit" class="searchBtn">Enter</button>
+
+        </form>
+
+          <div class="rowMeal" id='sundaymeal'>
+              <strong class="mealName" >i.e Spagetti and Meatballs (JS Web API data goes here)</strong>
+              <p class="mealIngredients">i.e Tomato Sauce, crush red peppers, Tomato Paste (JS Web API data goes here)</p>
+          </div>
+          
+          <div class="btn">
+        <input type="textDrink" class="searchDrink" placeholder="Enter Your Drink Here">
+        <button type="type" class="searchBtn">Enter</button>
+          </div>
+        <div class="rowDrink">
+            <strong class="drinkName">i.e Long Island Ice Tea (JS Web API data goes here)</strong>
+            <p class="drinkIngredients">Vodka, Tequila, Triple sec, rum, Gin (JS Web API data goes here)</p>
         </div>
-        <div class="rowMeal">
-            <strong class="mealName" >i.e Spagetti and Meatballs (JS Web API data goes here)</strong>
-            <p class="mealIngredients">i.e Tomato Sauce, crush red peppers, Tomato Paste (JS Web API data goes here)</p>
-        </div>
-        <div class="btn">
-      <input type="textDrink" class="searchDrink" placeholder="Enter Your Drink Here">
-      <button type="type" class="searchBtn">Enter</button>
-        </div>
-      <div class="rowDrink">
-          <strong class="drinkName">i.e Long Island Ice Tea (JS Web API data goes here)</strong>
-          <p class="drinkIngredients">Vodka, Tequila, Triple sec, rum, Gin (JS Web API data goes here)</p>
       </div>
-    </div>
     </div>
 
     <div class="container">
