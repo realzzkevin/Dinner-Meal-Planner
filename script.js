@@ -26,23 +26,16 @@ async function searchRecipes(name) {
 
                 response.json().then(function(data){
 
-                    //food = data;
-
                     console.log(data);
 
                     // a list of recipeis
                     var foodList = data.results;
 
-                    //console.log(food.results);
                     console.log(foodList);
 
-                   // console.log(foodList[0].id);
 
                     showRecipetList(foodList);
 
-                    
-                    getIngredients(foodList[0].id);
-                    
                     return foodList;
                 });
 
@@ -113,7 +106,9 @@ async function searchCocktail(name) {
 
                     var list = data.drinks;
 
-                    getCTingredient(list[0]);
+                    showCocktailList(list);
+
+                    //getCTingredient(list[0]);
 
 
                 })
@@ -150,16 +145,17 @@ function showRecipetList(list){
     tabEl.append(ulEl);
     
     for (var i=0; i<list.length; i++){
+
         var liEl = $('<li>');
-        var aEl = $('<a>').attr('href', "#tab-"+i);
+        var aEl = $('<a>').attr('href', "#tab-"+(i+1));
         aEl.text(list[i].title);
         liEl.append(aEl);
         ulEl.append(liEl);
 
-        var subTabEl = $('<div>').attr('id',"tab-"+i);
+        var subTabEl = $('<div>').attr('id',"tab-"+(i+1));
         var pEl = $('<p>').text(list[i].title);
         var imgEl = $('<img>').attr('src', list[i].image);
-        var btnEl =$('button').attr('id', list[i].id);
+        var btnEl =$('<button>').attr('id', list[i].id);
 
         btnEl.append(imgEl);
         subTabEl.append(pEl);
@@ -169,9 +165,15 @@ function showRecipetList(list){
     }
 
     console.log(tabEl);
-    
-    $('#tabs').tabs();
 
+    //$('#tabs').tabs();
+
+    //$('body').append(tabEl);
+
+    $('#sundaymeal').empty();
+    $('#sundaymeal').append(tabEl);
+
+    $('#tabs').tabs();
     return tabEl;
 
 
@@ -180,6 +182,43 @@ function showRecipetList(list){
 
 function showCocktailList(list){
 
+    var tabEl= $('<div>').attr('id','tabs');
+    var ulEl = $('<ul>');
+    tabEl.append(ulEl);
+    
+    for (var i=0; i<list.length; i++){
+
+        var liEl = $('<li>');
+        var aEl = $('<a>').attr('href', "#tab-"+(i+1));
+        aEl.text(list[i].strDrink);
+        liEl.append(aEl);
+        ulEl.append(liEl);
+
+        var subTabEl = $('<div>').attr('id',"tab-"+(i+1));
+        var pEl = $('<p>').text(list[i].strDrink);
+        var imgEl = $('<img>').attr('src', list[i].strDrinkThumb);
+        var btnEl =$('<button>').attr('id', list[i].idDrink);
+
+        btnEl.append(imgEl);
+        subTabEl.append(pEl);
+        subTabEl.append(btnEl);
+
+        tabEl.append(subTabEl);
+    }
+
+    console.log(tabEl);
+
+    //$('#tabs').tabs();
+
+    //$('body').append(tabEl);
+
+    $('#sundayDrink').empty();
+    $('#sundayDrink').append(tabEl);
+
+    $('#tabs').tabs();
+
+    
+    return tabEl;
 
 }
 
@@ -199,7 +238,7 @@ function addCocktail(){
 //searchRecipes('spaghetti');
 //searchCocktail('Screwdriver');
 
-$('form').submit(function( event ){
+$('form.meal').submit(function( event ){
 
     event.preventDefault();
 
@@ -212,7 +251,7 @@ $('form').submit(function( event ){
     console.log(str);
 
     var list;
-    
+    /* codes not working
     async function go() {
         list = await searchRecipes(str);
 
@@ -222,8 +261,21 @@ $('form').submit(function( event ){
     go();
 
     console.log(list);
+    */
+
+    searchRecipes(str);
+
+
 
 });
 
 
-$()
+$('form.drink').submit(function(event){
+
+    event.preventDefault();
+    var arg = $(this).children('input').val();
+
+    str = arg.replaceAll(' ','+');
+
+    searchCocktail(str);
+});
