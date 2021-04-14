@@ -1,7 +1,9 @@
 var cdbKey ='1';
 var cname;
+
 //var cByName =`search.php?s=${cname}`;
 //var cDBcriteria = cByName;
+
 var food;
 //ingredients will be stored in an array.
 var fIngredients=[];
@@ -35,6 +37,7 @@ async function searchRecipes(name) {
                     var foodList = data.results;
 
                     //console.log(food.results);
+                    console.log(foodList);
 
                     console.log(foodList[0].id);
 
@@ -133,5 +136,5 @@ function displayReceipeOpt(){
     
 }
 
-searchRecipes('spagetti');
-searchCoktail('Screwdriver');
+searchRecipes('spaghetti');
+searchCocktail('Screwdriver');
