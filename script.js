@@ -34,7 +34,7 @@ async function searchRecipes(name) {
                     console.log(foodList);
 
 
-                    showRecipetList(foodList);
+                    showRecipetList(foodList, name);
 
                     return foodList;
                 });
@@ -76,8 +76,10 @@ async function getIngredients(id) {
 
                     }
 
+                    
                     console.log(fIngredients);
 
+                    return fIngredients;
                 })
 
             }else{
@@ -96,20 +98,14 @@ async function searchCocktail(name) {
         .then(function(response){
 
             if(response.ok){
-                //cocktail = response.json();
 
                 response.json().then(function(data){
-
-                    //cocktail = data;
 
                     console.log(data);
 
                     var list = data.drinks;
 
-                    showCocktailList(list);
-
-                    //getCTingredient(list[0]);
-
+                    showCocktailList(list, name);
 
                 })
             } else {
@@ -137,25 +133,28 @@ function getCTingredient(cTname) {
 }
 
 // take a list of recipets display them in a group of tab.
-function showRecipetList(list){
+function showRecipetList(list, tabName){
 
+    tabName = tabName.replaceAll('+', '_');
+    console.log(list);
     
-    var tabEl= $('<div>').attr('id','tabs');
+    var tabEl= $('<div>').attr('id', `${tabName}`);
     var ulEl = $('<ul>');
     tabEl.append(ulEl);
     
     for (var i=0; i<list.length; i++){
 
         var liEl = $('<li>');
-        var aEl = $('<a>').attr('href', "#tab-"+(i+1));
+        var aEl = $('<a>').attr('href', `#${tabName}-${(i+1)}`);
         aEl.text(list[i].title);
         liEl.append(aEl);
         ulEl.append(liEl);
 
-        var subTabEl = $('<div>').attr('id',"tab-"+(i+1));
+        var subTabEl = $('<div>').attr('id',`${tabName}-${(i+1)}`);
         var pEl = $('<p>').text(list[i].title);
         var imgEl = $('<img>').attr('src', list[i].image);
         var btnEl =$('<button>').attr('id', list[i].id);
+        btnEl.attr('name', `${tabName}`);
 
         btnEl.append(imgEl);
         subTabEl.append(pEl);
@@ -165,39 +164,44 @@ function showRecipetList(list){
     }
 
     console.log(tabEl);
-
-    //$('#tabs').tabs();
-
-    //$('body').append(tabEl);
-
+///////////////////////////////////////////
     $('#sundaymeal').empty();
     $('#sundaymeal').append(tabEl);
-
-    $('#tabs').tabs();
-    return tabEl;
-
-
+////////////////////////////////////////////   
+    $(`#${tabName}`).tabs();
     
+    $(`button[name='${tabName}']`).on('click', function(event){
+    
+        var recipetTab = $(this).parent();
+        addRecipet(recipetTab);
+    
+    });
+    
+    
+    return tabEl;    
 }
 
-function showCocktailList(list){
+function showCocktailList(list, tabName){
 
-    var tabEl= $('<div>').attr('id','tabs');
+    tabName = tabName.replaceAll('+', '_');
+
+    var tabEl= $('<div>').attr('id', `${tabName}`);
     var ulEl = $('<ul>');
     tabEl.append(ulEl);
     
     for (var i=0; i<list.length; i++){
 
         var liEl = $('<li>');
-        var aEl = $('<a>').attr('href', "#tab-"+(i+1));
+        var aEl = $('<a>').attr('href', `#${tabName}-${(i+1)}`);
         aEl.text(list[i].strDrink);
         liEl.append(aEl);
         ulEl.append(liEl);
 
-        var subTabEl = $('<div>').attr('id',"tab-"+(i+1));
+        var subTabEl = $('<div>').attr('id',`${tabName}-${(i+1)}`);
         var pEl = $('<p>').text(list[i].strDrink);
         var imgEl = $('<img>').attr('src', list[i].strDrinkThumb);
         var btnEl =$('<button>').attr('id', list[i].idDrink);
+        btnEl.attr('name',`${tabName}`);
 
         btnEl.append(imgEl);
         subTabEl.append(pEl);
@@ -207,17 +211,22 @@ function showCocktailList(list){
     }
 
     console.log(tabEl);
-
-    //$('#tabs').tabs();
-
-    //$('body').append(tabEl);
-
+//////////////////////////////////////////
+//need find a way to replace these two lines with correct selector.
     $('#sundayDrink').empty();
     $('#sundayDrink').append(tabEl);
+//////////////////////////////////////////
+    $(`#${tabName}`).tabs();
 
-    $('#tabs').tabs();
+    $(`button[name='${tabName}']`).on('click', function(event){
+        
+        var drinkTab = $(this).parent();
+        console.log(drinkTab);
 
+       addCocktail(drinkTab);
     
+    });
+
     return tabEl;
 
 }
@@ -225,18 +234,28 @@ function showCocktailList(list){
 // attach recipet to index.html
 function addRecipet(recipet){
 
+    
+    var prev = recipet.parents('.rowMeal');
+    var id = recipet.children('button').attr('id');
+    console.log(id);
+
+//get ingredients by id need find a way to add them.
+    getIngredients(id);
+    prev.empty();
+    prev.append(recipet);
+
+    console.log(recipet);
 
 }
 
-function addCocktail(){
+function addCocktail(drink){
 
+    var prev = drink.parents('.rowDrink');
+    prev.empty();
+    prev.append(drink);
 
 }
 
-
-
-//searchRecipes('spaghetti');
-//searchCocktail('Screwdriver');
 
 $('form.meal').submit(function( event ){
 
@@ -251,7 +270,7 @@ $('form.meal').submit(function( event ){
     console.log(str);
 
     var list;
-    /* codes not working
+    /* codes not work
     async function go() {
         list = await searchRecipes(str);
 

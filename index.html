@@ -6,13 +6,13 @@
     <title>Project1 - Meal Planning API</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://resources/demos/style.css">
+    <!--<link rel="stylesheet" href="https://resources/demos/style.css">-->
     <link rel="stylesheet" href="./style.css">  
   </head>
  
   
   <body>
-    <section class="section">
+    <header class="section">
       <div class="container">
         <h1 class="title">
           
@@ -21,31 +21,38 @@
           Hello! and Welcome to the <strong>Meal Planning API</strong>! Please use the below and create the a schedule for week with all the ingredients that you need need
         </p>
       </div>
-    </section>
+    </header>
 
     <div class="container">
       <div class="notification is-primary">
         <strong class="day">Sunday</strong>
 
-        <form class="btn meal">
-
-          <input type="text" class="searchMeal" name='sundaymeal' placeholder="Enter Your Meal Here">
-          <button type="submit" class="searchBtn">Enter</button>
-
-        </form>
-
+        <div>
+          
+          <form class="btn meal">
+  
+            <input type="text" class="searchMeal" name='sundaymeal' placeholder="Enter Your Meal Here">
+            <button type="submit" class="searchBtn">Enter</button>
+  
+          </form>
+  
           <div class="rowMeal" id='sundaymeal'>
               <strong class="mealName" >i.e Spagetti and Meatballs (JS Web API data goes here)</strong>
               <p class="mealIngredients">i.e Tomato Sauce, crush red peppers, Tomato Paste (JS Web API data goes here)</p>
           </div>
+          
+        </div>
 
+        <div>          
           <form class="btn drink">
-        <input type="textDrink" class="searchDrink" placeholder="Enter Your Drink Here">
-        <button type="type" class="searchBtn">Enter</button>
+            <input type="text" class="searchDrink" placeholder="Enter Your Drink Here">
+            <button type="submit" class="searchBtn">Enter</button>
           </form>
-        <div class="rowDrink" id="sundayDrink">
-            <strong class="drinkName">i.e Long Island Ice Tea (JS Web API data goes here)</strong>
-            <p class="drinkIngredients">Vodka, Tequila, Triple sec, rum, Gin (JS Web API data goes here)</p>
+  
+          <div class="rowDrink" id="sundayDrink">
+              <strong class="drinkName">i.e Long Island Ice Tea (JS Web API data goes here)</strong>
+              <p class="drinkIngredients">Vodka, Tequila, Triple sec, rum, Gin (JS Web API data goes here)</p>
+          </div>
         </div>
       </div>
     </div>
