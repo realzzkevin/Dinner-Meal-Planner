@@ -12,7 +12,7 @@ var cocktail;
 var CTIngredients=[];
 
 //search recipes by their name. return a list of recipes;
-async function searchRecipes(name) {
+async function searchRecipes(name, dispId) {
     
     var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=5`;
 
@@ -34,7 +34,7 @@ async function searchRecipes(name) {
                     console.log(foodList);
 
 
-                    showRecipetList(foodList, name);
+                    showRecipetList(foodList, name, dispId);
 
                     return foodList;
                 });
@@ -90,7 +90,7 @@ async function getIngredients(id) {
     
 }
 //search cocktails by name
-async function searchCocktail(name) {
+async function searchCocktail(name, dispId) {
 
     var ThecocktailDBUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
 
@@ -105,7 +105,7 @@ async function searchCocktail(name) {
 
                     var list = data.drinks;
 
-                    showCocktailList(list, name);
+                    showCocktailList(list, name, dispId);
 
                 })
             } else {
@@ -133,7 +133,7 @@ function getCTingredient(cTname) {
 }
 
 // take a list of recipets display them in a group of tab.
-function showRecipetList(list, tabName){
+function showRecipetList(list, tabName, dispId){
 
     tabName = tabName.replaceAll('+', '_');
     console.log(list);
@@ -165,8 +165,10 @@ function showRecipetList(list, tabName){
 
     console.log(tabEl);
 ///////////////////////////////////////////
-    $('#sundaymeal').empty();
-    $('#sundaymeal').append(tabEl);
+    //$('#sundaymeal').empty();
+    //$('#sundaymeal').append(tabEl);
+    $(`#${dispId}`).empty();
+    $(`#${dispId}`).append(tabEl);
 ////////////////////////////////////////////   
     $(`#${tabName}`).tabs();
     
@@ -181,7 +183,7 @@ function showRecipetList(list, tabName){
     return tabEl;    
 }
 
-function showCocktailList(list, tabName){
+function showCocktailList(list, tabName, dispId){
 
     tabName = tabName.replaceAll('+', '_');
 
@@ -213,9 +215,13 @@ function showCocktailList(list, tabName){
     console.log(tabEl);
 //////////////////////////////////////////
 //need find a way to replace these two lines with correct selector.
-    $('#sundayDrink').empty();
-    $('#sundayDrink').append(tabEl);
+    //$('#sundayDrink').empty();
+    //$('#sundayDrink').append(tabEl);
 //////////////////////////////////////////
+
+    $(`#${dispId}`).empty();
+    $(`#${dispId}`).append(tabEl);
+
     $(`#${tabName}`).tabs();
 
     $(`button[name='${tabName}']`).on('click', function(event){
@@ -267,22 +273,9 @@ $('form.meal').submit(function( event ){
     
     str = arg.replaceAll(' ','+');
 
-    console.log(str);
-
-    var list;
-    /* codes not work
-    async function go() {
-        list = await searchRecipes(str);
-
-        console.log(list);
-    }
-
-    go();
-
-    console.log(list);
-    */
-
-    searchRecipes(str);
+    var dayOfWeek = $(this).children('input').attr('name');
+    console.log(dayOfWeek);
+    searchRecipes(str, dayOfWeek);
 
 
 
@@ -293,8 +286,10 @@ $('form.drink').submit(function(event){
 
     event.preventDefault();
     var arg = $(this).children('input').val();
+    var dayOfWeek = $(this).children('input').attr('name');
+    var str = arg.replaceAll(' ','+');
 
-    str = arg.replaceAll(' ','+');
+    searchCocktail(str, dayOfWeek);
 
-    searchCocktail(str);
+    console.log($(this).name);
 });
