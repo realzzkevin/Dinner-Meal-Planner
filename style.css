@@ -52,3 +52,22 @@
     margin-bottom: 40px;
 }
 
+.drinkImg{
+    height:40%;
+    width:40%;
+}
+
+.recipeBtn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.rList{
+
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    margin: 10px;
+}

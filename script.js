@@ -5,16 +5,28 @@ var food;
 //ingredients will be stored in an array.
 var fIngredients=[];
 
-var spoonKey = "4d74df0d2f4a433e9df53519bb28d05a";
+var spoonKey = "bbd5b54b464947c8a46760a76858c81b"//"4d74df0d2f4a433e9df53519bb28d05a";
 var recipes='complexSearch';
 var fCriteria = recipes;
 var cocktail;
 var CTIngredients=[];
 
+var menuvar = {
+
+    sudayMeal : null,
+
+    sudayDrink : null,
+
+    mondayMeal : null,
+
+    mondayMeal : null
+
+}
+
 //search recipes by their name. return a list of recipes;
 async function searchRecipes(name, dispId) {
     
-    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=5`;
+    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=2`;
 
     console.log(spoonUrl);
 
@@ -70,16 +82,23 @@ async function getIngredients(id) {
 
                     var ingreList = data.ingredients;
 
+                    var ingre=[];
+                    //ingre.push(id);
+
                     for(var i=0; i<ingreList.length; i++){
 
-                        fIngredients.push(ingreList[i].name +': '+ingreList[i].amount.us.value+' '+ingreList[i].amount.us.unit);
-
+                        //fIngredients.push(ingreList[i].name +': '+ingreList[i].amount.us.value+' '+ingreList[i].amount.us.unit);
+                        ingre.push(ingreList[i].amount.us.value+' '+ingreList[i].amount.us.unit +' '+ingreList[i].name +'.' );
                     }
 
-                    
-                    console.log(fIngredients);
+                    console.log(ingre);
 
-                    return fIngredients;
+                    //addRecipet(ingre, id);
+                    addIngredients(ingre, id);
+                    //console.log(fIngredients);
+
+                    //return fIngredients;
+                    return ingre;
                 })
 
             }else{
@@ -106,6 +125,8 @@ async function searchCocktail(name, dispId) {
                     var list = data.drinks;
 
                     showCocktailList(list, name, dispId);
+                    
+                    return list;
 
                 })
             } else {
@@ -141,8 +162,10 @@ function showRecipetList(list, tabName, dispId){
     var tabEl= $('<div>').attr('id', `${tabName}`);
     var ulEl = $('<ul>');
     tabEl.append(ulEl);
-    
+
     for (var i=0; i<list.length; i++){
+
+        console.log(list[i]);
 
         var liEl = $('<li>');
         var aEl = $('<a>').attr('href', `#${tabName}-${(i+1)}`);
@@ -155,26 +178,31 @@ function showRecipetList(list, tabName, dispId){
         var imgEl = $('<img>').attr('src', list[i].image);
         var btnEl =$('<button>').attr('id', list[i].id);
         btnEl.attr('name', `${tabName}`);
-
+        btnEl.addClass('recipeBtn');
+        
+        var recEl = $('<div>').attr('name', 'recipes');
+        recEl.addClass('rList');
+        recEl.empty();
+        
         btnEl.append(imgEl);
+        btnEl.append(recEl);
         subTabEl.append(pEl);
         subTabEl.append(btnEl);
 
         tabEl.append(subTabEl);
+
+        getIngredients(list[i].id);
     }
 
-    console.log(tabEl);
-///////////////////////////////////////////
-    //$('#sundaymeal').empty();
-    //$('#sundaymeal').append(tabEl);
+
     $(`#${dispId}`).empty();
-    $(`#${dispId}`).append(tabEl);
-////////////////////////////////////////////   
+    $(`#${dispId}`).append(tabEl); 
     $(`#${tabName}`).tabs();
     
     $(`button[name='${tabName}']`).on('click', function(event){
     
         var recipetTab = $(this).parent();
+        console.log($(recipetTab));
         addRecipet(recipetTab);
     
     });
@@ -202,6 +230,8 @@ function showCocktailList(list, tabName, dispId){
         var subTabEl = $('<div>').attr('id',`${tabName}-${(i+1)}`);
         var pEl = $('<p>').text(list[i].strDrink);
         var imgEl = $('<img>').attr('src', list[i].strDrinkThumb);
+        imgEl.addClass('drinkImg');
+
         var btnEl =$('<button>').attr('id', list[i].idDrink);
         btnEl.attr('name',`${tabName}`);
 
@@ -213,11 +243,6 @@ function showCocktailList(list, tabName, dispId){
     }
 
     console.log(tabEl);
-//////////////////////////////////////////
-//need find a way to replace these two lines with correct selector.
-    //$('#sundayDrink').empty();
-    //$('#sundayDrink').append(tabEl);
-//////////////////////////////////////////
 
     $(`#${dispId}`).empty();
     $(`#${dispId}`).append(tabEl);
@@ -238,20 +263,28 @@ function showCocktailList(list, tabName, dispId){
 }
 
 // attach recipet to index.html
-function addRecipet(recipet){
+function addIngredients(ingreList, tabId){
 
+//get ingredients by id need find a way to add them.
+    var recTab = $(`#${tabId} > div[name='recipes']`);
+    recTab.empty();
+    console.log(recTab);
+
+    for (var i=0; i<ingreList.length; i++){
+
+        var pEl = $('<p>').text(ingreList[i]);
+        recTab.append(pEl);
+    }
+
+}
+
+function addRecipet(recipet){
     
     var prev = recipet.parents('.rowMeal');
     var id = recipet.children('button').attr('id');
-    console.log(id);
-
-//get ingredients by id need find a way to add them.
-    getIngredients(id);
     prev.empty();
     prev.append(recipet);
-
     console.log(recipet);
-
 }
 
 function addCocktail(drink){
@@ -266,19 +299,11 @@ function addCocktail(drink){
 $('form.meal').submit(function( event ){
 
     event.preventDefault();
-
-    //console.log($(this).children('input').val());
-
-    var arg = $(this).children('input').val();
-    
-    str = arg.replaceAll(' ','+');
-
+    var arg = $(this).children('input').val();    
+    var str = arg.replaceAll(' ','+');
     var dayOfWeek = $(this).children('input').attr('name');
-    console.log(dayOfWeek);
+
     searchRecipes(str, dayOfWeek);
-
-
-
 });
 
 
@@ -290,6 +315,6 @@ $('form.drink').submit(function(event){
     var str = arg.replaceAll(' ','+');
 
     searchCocktail(str, dayOfWeek);
-
-    console.log($(this).name);
 });
+
+
