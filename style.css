@@ -1,10 +1,17 @@
 .notification {
     border: 2px solid black; 
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .container .notification {
-    box-shadow: 0 0 10px black;
+    box-shadow: 0 0 20px black;
+    background-color: black;
+}
+
+.day {
+    border: 2px solid white;
+    box-shadow: 0 0 10px white;
+    padding: 10px;
 }
 
 
