@@ -47,7 +47,7 @@ var menu = {
 //search recipes by their name. return a list of recipes;
 async function searchRecipes(name, dispId) {
     
-    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=1`;
+    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=5`;
 
     console.log(spoonUrl);
 
