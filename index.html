@@ -4,33 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Project1 - Meal Planning API</title>
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!--<link rel="stylesheet" href="https://resources/demos/style.css">-->
-    <link rel="stylesheet" href="./style.css">  
+      
   </head>
  
   
-  <body>
+  <body class="has-background-warning">
     <header class="section">
+      <div class="notification has-background-primary-light">
       <div class="container">
-        <h1 class="title">
+        <h1 class="title has-text-centered">
           Dinner Meal Planning API
         </h1>
-        <p class="subtitle">
-          Hello! and Welcome to the <strong>Meal Planning API</strong>! Please use the below and create the a schedule for week with all the ingredients that you need need
+        <p class="subtitle has-text-centered">
+          Hello! Welcome to the <strong>Meal Planning APP</strong>! Please use the Application below to create a meal schedule for the week with all the ingredients that you might need
         </p>
+      </div>
       </div>
     </header>
 
     <div class="container">
-        <div class="notification is-primary">
+        <div class="notification is-success">
             <strong class="day">Sunday</strong>
 
             <div>              
                 <form class="btn meal">        
-                  <input type="text" class="searchMeal" name='sundayMeal' placeholder="Enter Your Meal Here">
-                  <button type="submit" class="searchBtn">Enter</button>        
+                  <input type="text" class="input is-primary" name='sundayMeal' placeholder="Enter Your Meal Here">
+                  <button type="submit" class="button is-primary">Enter</button>        
                 </form>
       
                 <div class="rowMeal" id='sundayMeal'>
@@ -41,8 +44,8 @@
 
             <div>          
                 <form class="btn drink">
-                    <input type="text" class="searchDrink" name='sundayDrink'placeholder="Enter Your Drink Here">
-                    <button type="submit" class="searchBtn">Enter</button>
+                    <input type="text" class="input is-primary" name='sundayDrink'placeholder="Enter Your Drink Here">
+                    <button type="submit" class="button is-primary">Enter</button>
                 </form>
       
                 <div class="rowDrink" id="sundayDrink">
@@ -60,8 +63,8 @@
           <div>
             
             <form class="btn meal">
-                <input type="textMeal" class="searchMeal" name='mondayMeal' placeholder="Enter Your Meal Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textMeal" class="input is-info" name='mondayMeal' placeholder="Enter Your Meal Here">
+                <button type="submit" class="button is-success">Enter</button>
             </form>
             
             <div class="rowMeal" id='mondayMeal'>
@@ -73,8 +76,8 @@
           <div>
 
               <form class="btn drink">
-                  <input type="textDrink" class="searchDrink" name='mondayDrink'placeholder="Enter Your Drink Here">
-                  <button type="submit" class="searchBtn">Enter</button>
+                  <input type="textDrink" class="input is-info" name='mondayDrink'placeholder="Enter Your Drink Here">
+                  <button type="submit" class="button is-success">Enter</button>
               </form>
 
               <div class="rowDrink"id='mondayDrink' >
@@ -92,8 +95,8 @@
           <div>
             
             <form class="btn meal" >
-                <input type="textMeal" class="searchMeal" name='tuesdayMeal' placeholder="Enter Your Meal Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textMeal" class="input is-info" name='tuesdayMeal' placeholder="Enter Your Meal Here">
+                <button type="submit" class="button is-success">Enter</button>
             </form>
             <div class="rowMeal" id='tuesdayMeal'>
                 <strong class="mealName" ></strong>
@@ -103,8 +106,8 @@
 
           <div>
               <form class="btn drink">
-                <input type="textDrink" class="searchDrink" name='tuesdayDrink' placeholder="Enter Your Drink Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textDrink" class="input is-info" name='tuesdayDrink' placeholder="Enter Your Drink Here">
+                <button type="submit" class="button is-success">Enter</button>
               </form>
               <div class="rowDrink"id='tuesdayDrink' >
                   <strong class="drinkName" ></strong>
@@ -122,8 +125,8 @@
             <div>
               
               <form class="btn meal">
-                <input type="textMeal" class="searchMeal" name='wednesdayMeal' placeholder="Enter Your Meal Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textMeal" class="input is-info" name='wednesdayMeal' placeholder="Enter Your Meal Here">
+                <button type="submit" class="button is-success">Enter</button>
               </form>
 
               <div class="rowMeal" id='wednesdayMeal'>
@@ -134,8 +137,8 @@
 
             <div>
               <form class="btn drink">
-                <input type="textDrink" class="searchDrink" name='wednesdayDrink'placeholder="Enter Your Drink Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textDrink" class="input is-info" name='wednesdayDrink'placeholder="Enter Your Drink Here">
+                <button type="submit" class="button is-success">Enter</button>
               </form>
               <div class="rowDrink" id='wednesdayDrink'>
                   <strong class="drinkName"></strong>
@@ -153,8 +156,8 @@
             <div>
               
               <form class="btn meal">
-                  <input type="textMeal" class="searchMeal" name='thursdayMeal' placeholder="Enter Your Meal Here">
-                  <button type="submit" class="searchBtn">Enter</button>
+                  <input type="textMeal" class="input is-info" name='thursdayMeal' placeholder="Enter Your Meal Here">
+                  <button type="submit" class="button is-success">Enter</button>
               </form>
               <div class="rowMeal" id='thursdayMeal'>
                   <strong class="mealName" ></strong>
@@ -164,8 +167,8 @@
 
             <div>
               <form class="btn drink">
-                <input type="textDrink" class="searchDrink" name='thursdayDrink' placeholder="Enter Your Drink Here">
-                <button type="submit" class="searchBtn">Enter</button>
+                <input type="textDrink" class="input is-info" name='thursdayDrink' placeholder="Enter Your Drink Here">
+                <button type="submit" class="button is-success">Enter</button>
               </form>
               <div class="rowDrink" id='thursdayDrink'>
                   <strong class="drinkName"></strong>
@@ -177,13 +180,13 @@
     </div>
 
     <div class="container">
-        <div class="notification is-primary">
+        <div class="notification is-danger">
             <strong class="day">Friday</strong>
 
                 <div>
                     <form class="btn meal">
-                      <input type="textMeal" class="searchMeal" name='fridayMeal' placeholder="Enter Your Meal Here">
-                      <button type="submit" class="searchBtn">Enter</button>
+                      <input type="textMeal" class="input is-primary" name='fridayMeal' placeholder="Enter Your Meal Here">
+                      <button type="submit" class="button is-info">Enter</button>
                     </form>
                     <div class="rowMeal" id='fridayMeal'>
                         <strong class="mealName" ></strong>
@@ -194,8 +197,8 @@
 
                 <div>
                   <form class="btn drink">
-                    <input type="textDrink" class="searchDrink" name='fridayDrink' placeholder="Enter Your Drink Here">
-                    <button type="submit" class="searchBtn">Enter</button>
+                    <input type="textDrink" class="input is-primary" name='fridayDrink' placeholder="Enter Your Drink Here">
+                    <button type="submit" class="button is-info">Enter</button>
                   </form>
                   <div class="rowDrink" id='fridayDrink'>
                       <strong class="drinkName"></strong>
@@ -208,13 +211,13 @@
     </div>
 
     <div class="container">
-        <div class="notification is-primary">
+        <div class="notification is-success">
             <strong class="day">Saturday</strong>
 
             <div>
                 <form class="btn meal">
-                    <input type="textMeal" class="searchMeal" name='saturdayMeal'placeholder="Enter Your Meal Here">
-                    <button type="submit" class="searchBtn">Enter</button>
+                    <input type="textMeal" class="input is-primary" name='saturdayMeal'placeholder="Enter Your Meal Here">
+                    <button type="submit" class="button is-primary">Enter</button>
                 </form>
                 <div class="rowMeal" id='saturdayMeal'>
                     <strong class="mealName" ></strong>
@@ -226,8 +229,8 @@
             <div>
               
                 <form class="btn drink">
-                    <input type="textDrink" class="searchDrink" name='saturdayDrink' placeholder="Enter Your Drink Here">
-                    <button type="submit" class="searchBtn">Enter</button>
+                    <input type="textDrink" class="input is-primary" name='saturdayDrink' placeholder="Enter Your Drink Here">
+                    <button type="submit" class="button is-primary">Enter</button>
                 </form>
                 <div class="rowDrink" id='saturdayDrink' >
                     <strong class="drinkName" ></strong>
@@ -246,5 +249,5 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>    
   <script src="script.js"></script>    
   </body>
-</html>
+  </html>
 
