@@ -1,12 +1,10 @@
 var cdbKey ='1';
 var cname;
-
 var food;
-//ingredients will be stored in an array.
-//var fIngredients=[];
 
-var spoonKey = "4d74df0d2f4a433e9df53519bb28d05a";
-//var spoonKey = "bbd5b54b464947c8a46760a76858c81b"
+//var spoonKey = "4d74df0d2f4a433e9df53519bb28d05a";
+//var spoonKey = "bbd5b54b464947c8a46760a76858c81b";
+var spoonKey = '44964d067dd249cdace9dbbbfde6a579';
 var recipes='complexSearch';
 var fCriteria = recipes;
 var cocktail;
@@ -99,12 +97,11 @@ async function getIngredients(id) {
 
                    // ingre = data;
 
-                    console.log(data);
+                   // console.log(data);
 
                     var ingreList = data.ingredients;
 
                     var ingre=[];
-                    //ingre.push(id);
 
                     for(var i=0; i<ingreList.length; i++){
 
@@ -114,11 +111,8 @@ async function getIngredients(id) {
 
                     console.log(ingre);
 
-                    //addRecipet(ingre, id);
                     addIngredients(ingre, id);
-                    //console.log(fIngredients);
 
-                    //return fIngredients;
                     return ingre;
                 })
 
@@ -141,8 +135,6 @@ async function searchCocktail(name, dispId) {
 
                 response.json().then(function(data){
 
-                    //console.log(data);
-
                     var list = data.drinks;
 
                     showCocktailList(list, name, dispId);
@@ -160,20 +152,6 @@ async function searchCocktail(name, dispId) {
 
 }
 
-// need find a way to make it work later.
-/*
-function getCTingredient(cTname, id) {
-    
-    var i =1;
-
-    var ingre =`strIngredient${i}`;
-
-    while(cTname.ingre!=null){
-
-
-    }
-
-}*/
 
 // take a list of recipets display them in a group of tab.
 function showRecipetList(list, tabName, dispId){
@@ -263,7 +241,7 @@ function showCocktailList(list, tabName, dispId){
         subTabEl.append(btnEl);
 
         tabEl.append(subTabEl);
-
+        // add indgredients and instruction into tab element.
         var drink = list[i];
         var ingreDiv = $('<div>').addClass('rList');
 
@@ -280,7 +258,6 @@ function showCocktailList(list, tabName, dispId){
                 measue = drink[`strMeasure${j}`];
             }
             
-            //var ingEl = $('<p>').text(drink[`strMeasure${j}`] + " " +drink[`strIngredient${j}`]);
             var ingEl = $('<p>').text(measue + " " +item);
             ingreDiv.append(ingEl);
 
@@ -331,7 +308,6 @@ function addIngredients(ingreList, tabId){
 function addRecipet(recipet){
     
     var prev = recipet.parents('.rowMeal');
-    //var id = recipet.children('button').attr('id');
     var day = prev.attr('id');
     var data = prev.html();
     prev.empty();
@@ -389,8 +365,6 @@ $('form.meal').submit(function( event ){
     var arg = $(this).children('input').val();    
     var str = arg.replaceAll(' ','+');
     var dayOfWeek = $(this).children('input').attr('name');
-
-    console.log((str===''));
 
     if (str!=''&&str!=null){
         searchRecipes(str, dayOfWeek);
