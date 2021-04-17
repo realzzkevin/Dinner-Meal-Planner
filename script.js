@@ -3,30 +3,51 @@ var cname;
 
 var food;
 //ingredients will be stored in an array.
-var fIngredients=[];
+//var fIngredients=[];
 
-var spoonKey = "bbd5b54b464947c8a46760a76858c81b"//"4d74df0d2f4a433e9df53519bb28d05a";
+var spoonKey = "4d74df0d2f4a433e9df53519bb28d05a";
+//var spoonKey = "bbd5b54b464947c8a46760a76858c81b"
 var recipes='complexSearch';
 var fCriteria = recipes;
 var cocktail;
 var CTIngredients=[];
 
-var menuvar = {
+var menu = {
 
-    sudayMeal : null,
+    sundayMeal : undefined,
 
-    sudayDrink : null,
+    sundayDrink : undefined,
 
-    mondayMeal : null,
+    mondayMeal : undefined,
 
-    mondayMeal : null
+    mondayDrink : undefined,
+
+    tuesdayMeal : undefined,
+
+    tuesdayDrink : undefined,
+
+    wednesdayMeal : undefined,
+
+    wednesdayDrink : undefined,
+
+    thursdayMeal : undefined,
+
+    thursdayDrink : undefined,
+
+    fridayMeal : undefined,
+
+    fridayDrink : undefined,
+
+    saturdayMeal : undefined,
+
+    saturdayDrink : undefined,
 
 }
 
 //search recipes by their name. return a list of recipes;
 async function searchRecipes(name, dispId) {
     
-    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=2`;
+    var spoonUrl = `https://api.spoonacular.com/recipes/${fCriteria}?apiKey=${spoonKey}&query=${name}&number=1`;
 
     console.log(spoonUrl);
 
@@ -262,39 +283,76 @@ function showCocktailList(list, tabName, dispId){
 
 }
 
-// attach recipet to index.html
 function addIngredients(ingreList, tabId){
-
-//get ingredients by id need find a way to add them.
+    
     var recTab = $(`#${tabId} > div[name='recipes']`);
     recTab.empty();
     console.log(recTab);
-
+    
     for (var i=0; i<ingreList.length; i++){
-
+        
         var pEl = $('<p>').text(ingreList[i]);
         recTab.append(pEl);
     }
-
+    
 }
 
+// attach recipet to index.html
 function addRecipet(recipet){
     
     var prev = recipet.parents('.rowMeal');
-    var id = recipet.children('button').attr('id');
+    //var id = recipet.children('button').attr('id');
+    var day = prev.attr('id');
+    var data = prev.html();
     prev.empty();
     prev.append(recipet);
-    console.log(recipet);
+    //save tab into localStorage
+    menu[day] = data;
+    localStorage.setItem('mealPlan', JSON.stringify(menu));
 }
 
 function addCocktail(drink){
 
     var prev = drink.parents('.rowDrink');
+
     prev.empty();
     prev.append(drink);
 
+    var day = prev.attr('id');
+    var data = prev.html();
+    menu[day] = data;
+    localStorage.setItem('mealPlan', JSON.stringify(menu));
 }
 
+function loadMenu(){
+
+    myMenu = JSON.parse(localStorage.getItem('mealPlan'));
+  
+    if (myMenu!=null){
+        
+        menu=myMenu;
+
+        var meal;
+        
+        for (meal in menu){
+
+            if(menu[meal]!=null){
+
+                var tab = $(`${menu[meal]}`);
+                console.log(tab);
+                $(`#${meal}`).empty()
+                $(`#${meal}`).append(menu[meal]);
+            }
+
+        }
+        
+    }     
+
+    console.log('loadmenu done');
+
+}
+
+loadMenu();
 
 $('form.meal').submit(function( event ){
 
@@ -303,7 +361,11 @@ $('form.meal').submit(function( event ){
     var str = arg.replaceAll(' ','+');
     var dayOfWeek = $(this).children('input').attr('name');
 
-    searchRecipes(str, dayOfWeek);
+    console.log((str===''));
+
+    if (str!=''&&str!=null){
+        searchRecipes(str, dayOfWeek);
+    }
 });
 
 
@@ -314,7 +376,12 @@ $('form.drink').submit(function(event){
     var dayOfWeek = $(this).children('input').attr('name');
     var str = arg.replaceAll(' ','+');
 
-    searchCocktail(str, dayOfWeek);
+
+    if(str!=''&&str!=null){
+        searchCocktail(str, dayOfWeek);
+    }else {
+        console.log("ERROR")
+    }
 });
 
 
