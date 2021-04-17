@@ -141,7 +141,7 @@ async function searchCocktail(name, dispId) {
 
                 response.json().then(function(data){
 
-                    console.log(data);
+                    //console.log(data);
 
                     var list = data.drinks;
 
@@ -161,7 +161,8 @@ async function searchCocktail(name, dispId) {
 }
 
 // need find a way to make it work later.
-function getCTingredient(cTname) {
+/*
+function getCTingredient(cTname, id) {
     
     var i =1;
 
@@ -172,7 +173,7 @@ function getCTingredient(cTname) {
 
     }
 
-}
+}*/
 
 // take a list of recipets display them in a group of tab.
 function showRecipetList(list, tabName, dispId){
@@ -186,9 +187,7 @@ function showRecipetList(list, tabName, dispId){
 
     for (var i=0; i<list.length; i++){
 
-        console.log(list[i]);
-
-        var liEl = $('<li>');
+        var liEl = $('<li>');   
         var aEl = $('<a>').attr('href', `#${tabName}-${(i+1)}`);
         aEl.text(list[i].title);
         liEl.append(aEl);
@@ -213,6 +212,7 @@ function showRecipetList(list, tabName, dispId){
         tabEl.append(subTabEl);
 
         getIngredients(list[i].id);
+
     }
 
 
@@ -242,6 +242,7 @@ function showCocktailList(list, tabName, dispId){
     
     for (var i=0; i<list.length; i++){
 
+
         var liEl = $('<li>');
         var aEl = $('<a>').attr('href', `#${tabName}-${(i+1)}`);
         aEl.text(list[i].strDrink);
@@ -255,12 +256,41 @@ function showCocktailList(list, tabName, dispId){
 
         var btnEl =$('<button>').attr('id', list[i].idDrink);
         btnEl.attr('name',`${tabName}`);
+        btnEl.addClass('recipeBtn');
 
         btnEl.append(imgEl);
         subTabEl.append(pEl);
         subTabEl.append(btnEl);
 
         tabEl.append(subTabEl);
+
+        var drink = list[i];
+        var ingreDiv = $('<div>').addClass('rList');
+
+        var j=1;
+        while (drink[`strIngredient${j}`]!=null||drink[`strMeasure${j}`]!=null){
+
+            var item ='', measue='';
+
+            if(drink[`strIngredient${j}`]!=null){
+                item = drink[`strIngredient${j}`];
+            }
+
+            if(drink[`strMeasure${j}`]!=null) {
+                measue = drink[`strMeasure${j}`];
+            }
+            
+            //var ingEl = $('<p>').text(drink[`strMeasure${j}`] + " " +drink[`strIngredient${j}`]);
+            var ingEl = $('<p>').text(measue + " " +item);
+            ingreDiv.append(ingEl);
+
+            j++
+        }
+
+        var instru = $('<p>').text(drink['strInstructions']);
+
+        ingreDiv.append(instru);
+        btnEl.append(ingreDiv);
     }
 
     console.log(tabEl);
@@ -338,8 +368,7 @@ function loadMenu(){
 
             if(menu[meal]!=null){
 
-                var tab = $(`${menu[meal]}`);
-                console.log(tab);
+                //var tab = $(`${menu[meal]}`);
                 $(`#${meal}`).empty()
                 $(`#${meal}`).append(menu[meal]);
             }
