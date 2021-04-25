@@ -18,9 +18,9 @@ Food and drinking is part of everyday life. If you go internet, ther are all sor
 
 https://docs.google.com/presentation/d/1XKokJM_Z_D4Gt4rjw6yAmiJzVfGySnUtC4BYC3eHjtg/edit#slide=id.g320332ed93_1_0
 
-https://realzzkevin.github.io/team-project/
+[https://github.com/realzzkevin/Dinner-Meal-Planner](https://github.com/realzzkevin/Dinner-Meal-Planner)
 
-https://github.com/realzzkevin/team-project
+[https://github.com/realzzkevin/Dinner-Meal-Planner](https://realzzkevin.github.io/Dinner-Meal-Planner)
 
 ![Project1 - Meal Planning API](https://user-images.githubusercontent.com/79114439/115099158-1bcb6e80-9f02-11eb-8265-b86539d95bc8.png)
 
